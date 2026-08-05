@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bearing Blueprints</title>
+
+<style>
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    background:#f5f6f8;
+    color:#333;
+}
+
+header{
+    background:#15395B;
+    color:white;
+    padding:50px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:2.7em;
+}
+
+header p{
+    font-size:1.2em;
+    opacity:0.9;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.card h2{
+    margin-top:0;
+    color:#15395B;
+}
+
+.button{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:12px 22px;
+
+    background:#0B6AA2;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:6px;
+
+    font-weight:bold;
+}
+
+.button:hover{
+    background:#084f78;
+}
+
+footer{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-top:60px;
+
+    padding-bottom:40px;
+
+}
+
+ul{
+
+    line-height:1.7em;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Bearing Blueprints</h1>
+
+<p>
+Interactive visualization of bearing degradation from detection to prognosis
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Overview</h2>
+
+<p>
+
+Bearing Blueprints is an interactive visual analytics project developed for the
+<strong>Information Visualization</strong> course of the
+<strong>MS in Data Science</strong> at the
+University of Colorado Boulder.
+
+</p>
+
+<p>
+
+The project uses the NASA IMS Bearing Dataset to investigate how visualization
+can help engineers detect degradation, understand anomalous behaviour and
+support predictive maintenance decisions.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Research Questions</h2>
+
+<ul>
+
+<li>Can users distinguish normal behaviour from degradation?</li>
+
+<li>Can they identify when degradation begins?</li>
+
+<li>Can visual evidence explain why a bearing is anomalous?</li>
+
+<li>Can degradation trends support exploratory prognosis?</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Operational Dashboard</h2>
+
+<p>
+
+Explore the run-to-failure experiment using an overview-to-detail workflow.
+Identify degrading bearings, inspect Health Index evolution and compare raw
+vibration signals.
+
+</p>
+
+<a class="button" href="operational.html">
+Open Operational Dashboard
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Prognostic Visualization</h2>
+
+<p>
+
+Explore different degradation models and investigate how observed trends
+may support an estimation of remaining useful life while illustrating
+prediction uncertainty.
+
+</p>
+
+<a class="button" href="prognostic.html">
+Open Prognostic Visualization
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Project Report</h2>
+
+<p>
+
+Technical report describing the dataset, design decisions,
+evaluation and findings.
+
+</p>
+
+<a class="button" href="report.pdf">
+Open Report (PDF)
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Resources</h2>
+
+<ul>
+
+<li>
+<a href="https://data.nasa.gov/dataset/ims-bearings">
+NASA IMS Bearing Dataset
+</a>
+</li>
+
+<li>
+<a href="https://github.com/YOUR_USERNAME/bearing-blueprints">
+GitHub Repository
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+
+Bearing Blueprints • 2026<br>
+
+Eduardo Di Santi
+
+</footer>
+
+</body>
+</html>
