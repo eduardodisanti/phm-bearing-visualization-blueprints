@@ -1,238 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Bearing Blueprints</title>
-
+<title>Bearing Blueprints — detecting and explaining bearing degradation</title>
 <style>
+  :root {
+    --ink: #1a1a1a; --muted: #5a6672; --line: #d7dee5;
+    --green: #2a9d5c; --red: #c9452e; --blue: #1d5f8a; --wash: #f4f7f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+                 Arial, sans-serif;
+    color: var(--ink); margin: 0; line-height: 1.55;
+    background: #fff;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 44px 26px 60px; }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    margin:0;
-    background:#f5f6f8;
-    color:#333;
-}
+  header { border-bottom: 1px solid var(--line); padding-bottom: 26px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .tag { font-size: 16px; color: var(--muted); margin: 0 0 18px; }
+  .claim {
+    font-size: 17px; line-height: 1.6; max-width: 720px; margin: 0;
+  }
+  .claim strong { color: var(--red); }
+  .byline { font-size: 13px; color: var(--muted); margin-top: 18px; }
 
-header{
-    background:#15395B;
-    color:white;
-    padding:50px;
-    text-align:center;
-}
+  h2 { font-size: 19px; margin: 40px 0 6px; }
+  h2 + p.lead { margin: 0 0 18px; color: var(--muted); font-size: 14.5px; }
 
-header h1{
-    margin:0;
-    font-size:2.7em;
-}
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
 
-header p{
-    font-size:1.2em;
-    opacity:0.9;
-}
+  .card {
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+    display: flex; flex-direction: column; background: #fff;
+    transition: box-shadow .15s ease, transform .15s ease;
+  }
+  .card:hover { box-shadow: 0 6px 20px rgba(20,40,60,.10); transform: translateY(-2px); }
+  .card .shot {
+    height: 156px; background: var(--wash); border-bottom: 1px solid var(--line);
+    background-size: cover; background-position: top center;
+  }
+  .card .body { padding: 16px 18px 18px; display: flex; flex-direction: column;
+                flex: 1; }
+  .who {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 20px; margin-bottom: 10px;
+    align-self: flex-start;
+  }
+  .who.ops { background: #e8f4ec; color: #1d6b3f; }
+  .who.res { background: #eef1f6; color: #3c4a5c; }
+  .card h3 { font-size: 17px; margin: 0 0 8px; }
+  .card p { font-size: 14px; margin: 0 0 12px; color: #333; }
+  .try { font-size: 13px; color: var(--muted); margin: 0 0 16px; }
+  .try li { margin-bottom: 3px; }
+  .try ul { margin: 6px 0 0 18px; padding: 0; }
+  .go {
+    margin-top: auto; display: inline-block; text-decoration: none;
+    background: var(--blue); color: #fff; font-size: 14px; font-weight: 600;
+    padding: 9px 16px; border-radius: 6px; align-self: flex-start;
+  }
+  .go:hover { background: #17496a; }
+  .go.alt { background: #4a5b6d; }
+  .go.alt:hover { background: #3a4757; }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:40px;
-}
+  .scope {
+    border-left: 4px solid var(--red); background: #fdf5f4;
+    padding: 14px 18px; margin: 34px 0 0; font-size: 14px; max-width: 760px;
+  }
+  .scope b { color: var(--red); }
 
-.card{
-    background:white;
-    border-radius:10px;
-    padding:30px;
-    margin-bottom:30px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+           margin: 18px 0 0; }
+  @media (max-width: 760px) { .facts { grid-template-columns: 1fr 1fr; } }
+  .fact { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .fact .n { font-size: 21px; font-weight: 700; }
+  .fact .l { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
-.card h2{
-    margin-top:0;
-    color:#15395B;
-}
+  ul.q { font-size: 15px; margin: 0; padding-left: 20px; max-width: 760px; }
+  ul.q li { margin-bottom: 6px; }
 
-.button{
+  .links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px;
+           margin-top: 10px; }
+  .links a { color: var(--blue); }
 
-    display:inline-block;
-
-    margin-top:15px;
-
-    padding:12px 22px;
-
-    background:#0B6AA2;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:6px;
-
-    font-weight:bold;
-}
-
-.button:hover{
-    background:#084f78;
-}
-
-footer{
-
-    text-align:center;
-
-    color:#777;
-
-    margin-top:60px;
-
-    padding-bottom:40px;
-
-}
-
-ul{
-
-    line-height:1.7em;
-
-}
-
+  footer { margin-top: 52px; padding-top: 18px; border-top: 1px solid var(--line);
+           font-size: 13px; color: var(--muted); }
 </style>
-
 </head>
-
 <body>
+<div class="wrap">
 
-<header>
+  <header>
+    <h1>Bearing Blueprints</h1>
+    <p class="tag">Detecting bearing degradation, and showing the evidence behind it</p>
+    <p class="claim">
+      Four bearings were run to destruction on a single shaft. One reference
+      model of healthy behaviour &mdash; trained without ever seeing these
+      units &mdash; scored every 10-minute recording. It flagged all four
+      between <strong>14.5 and 74 hours</strong> before they failed, and for
+      each alarm it can show which 60&nbsp;milliseconds of signal caused it.
+    </p>
+    <p class="byline">
+      DTSA 5304 &middot; Fundamentals of Data Visualization &middot;
+      University of Colorado Boulder &middot; Eduardo Di Santi
+    </p>
+  </header>
 
-<h1>Bearing Blueprints</h1>
+  <h2>Two views, two audiences</h2>
+  <p class="lead">
+    They answer different questions on different timescales, so they are kept
+    apart: a maintenance decision should not require reading a model
+    comparison.
+  </p>
 
-<p>
-Interactive visualization of bearing degradation from detection to prognosis
-</p>
+  <div class="cards">
 
-</header>
+    <div class="card">
+      <div class="shot" style="background-image:url('assets/operational.png')"></div>
+      <div class="body">
+        <span class="who ops">For maintenance engineers</span>
+        <h3>Operational dashboard</h3>
+        <p>
+          Which unit needs attention, when it started deviating, and what the
+          model actually saw. Overview to detail, three controls.
+        </p>
+        <div class="try">
+          Try this:
+          <ul>
+            <li>Find the bearing that was worst at hour 90.</li>
+            <li>Open a healthy period, then one near failure.</li>
+            <li>Compare the two waveforms &mdash; the scales never move.</li>
+          </ul>
+        </div>
+        <a class="go" href="visualization/bearing_operational.html">
+          Open the dashboard</a>
+      </div>
+    </div>
 
-<div class="container">
+    <div class="card">
+      <div class="shot" style="background-image:url('assets/prognostic.png')"></div>
+      <div class="body">
+        <span class="who res">For method review</span>
+        <h3>Prognostic exploration</h3>
+        <p>
+          Which growth law each failure follows, how early a projection can be
+          trusted, and what deciding early costs in accuracy.
+        </p>
+        <div class="try">
+          Try this:
+          <ul>
+            <li>Compare growth laws by their Akaike weight.</li>
+            <li>Move the decision time from t1 to t5.</li>
+            <li>Read the matrix: red means the warning came too late.</li>
+          </ul>
+        </div>
+        <a class="go alt" href="visualization/bearing_monitor.html">
+          Open the exploration</a>
+      </div>
+    </div>
 
-<div class="card">
+  </div>
 
-<h2>Overview</h2>
+  <div class="scope">
+    <b>Scope.</b> Detection is validated: the operational dashboard reproduces
+    results from a manuscript under review. The prognostic view is an
+    <b>exploratory extension</b> &mdash; neither manuscript claims or validates
+    a projection of time-to-failure, and with four bearings none could. It is
+    published to show how the trajectory can be modelled and how unstable the
+    resulting dates are, not to predict one.
+  </div>
 
-<p>
+  <h2>Research questions</h2>
+  <ul class="q">
+    <li>Can a user tell normal behaviour from degradation?</li>
+    <li>Can they identify when the degradation began?</li>
+    <li>Can visual evidence explain <em>why</em> a bearing is flagged?</li>
+    <li>Does a failure follow a law, or does it become unpredictable?</li>
+  </ul>
 
-Bearing Blueprints is an interactive visual analytics project developed for the
-DTSA 5304 Fundamentals of Data Visualization at the University of Colorado Boulder.
+  <h2>The dataset in four numbers</h2>
+  <div class="facts">
+    <div class="fact"><div class="n">4</div>
+      <div class="l">bearings, run to failure on one shaft</div></div>
+    <div class="fact"><div class="n">984</div>
+      <div class="l">recordings, one every 10 minutes</div></div>
+    <div class="fact"><div class="n">20 kHz</div>
+      <div class="l">sampling, 20,480 samples per recording</div></div>
+    <div class="fact"><div class="n">14.5&ndash;74 h</div>
+      <div class="l">warning before the documented end of run</div></div>
+  </div>
 
-</p>
+  <h2>Method and reproducibility</h2>
+  <p class="lead">
+    A convolutional autoencoder is trained once on simulated healthy signals
+    and transferred unchanged to every unit. The only quantity estimated per
+    bearing is a scalar operating limit, fixed during its first hours of
+    service. Everything shown here is precomputed, so the pages are static
+    and work offline.
+  </p>
+  <div class="links">
+    <a href="report.pdf">Project report (PDF)</a>
+    <a href="https://github.com/eduardodisanti/phm-bearing-visualization-blueprints">Source and reproduction package</a>
+    <a href="https://data.nasa.gov/dataset/ims-bearings">NASA IMS bearing dataset</a>
+  </div>
 
-<p>
-
-The project uses the NASA IMS Bearing Dataset to investigate how visualization
-can help engineers detect degradation, understand anomalous behaviour and
-support predictive maintenance decisions.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>Research Questions</h2>
-
-<ul>
-
-<li>Can users distinguish normal behaviour from degradation?</li>
-
-<li>Can they identify when degradation begins?</li>
-
-<li>Can visual evidence explain why a bearing is anomalous?</li>
-
-<li>Can degradation trends support exploratory prognosis?</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>Operational Dashboard</h2>
-
-<p>
-
-Explore the run-to-failure experiment using an overview-to-detail workflow.
-Identify degrading bearings, inspect Health Index evolution and compare raw
-vibration signals.
-
-</p>
-
-<a class="button" href="visualization/bearing_operational.html">
-Open Operational Dashboard
-</a>
-
-</div>
-
-<div class="card">
-
-<h2>Prognostic Visualization</h2>
-
-<p>
-
-Explore different degradation models and investigate how observed trends
-may support an estimation of remaining useful life while illustrating
-prediction uncertainty.
-
-</p>
-
-<a class="button" href="visualization/bearing_monitor.html">
-Open Prognostic Visualization
-</a>
-
-</div>
-
-<div class="card">
-
-<h2>Project Report</h2>
-
-<p>
-
-Technical report describing the dataset, design decisions,
-evaluation and findings.
-
-</p>
-
-<a class="button" href="report.pdf">
-Open Report (PDF)
-</a>
-
-</div>
-
-<div class="card">
-
-<h2>Resources</h2>
-
-<ul>
-
-<li>
-<a href="https://data.nasa.gov/dataset/ims-bearings">
-NASA IMS Bearing Dataset
-</a>
-</li>
-
-<li>
-<a href="https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/">
-GitHub Repository
-</a>
-</li>
-
-</ul>
+  <footer>
+    Bearing Blueprints &middot; 2026 &middot; Eduardo Di Santi
+  </footer>
 
 </div>
-
-</div>
-
-<footer>
-
-Bearing Blueprints • 2026<br>
-
-Eduardo Di Santi
-
-</footer>
-
 </body>
 </html>
