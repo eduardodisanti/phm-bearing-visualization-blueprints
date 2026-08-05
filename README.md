@@ -114,20 +114,13 @@ Future work may include:
 * comparison with alternative health indicators;
 * validation of prognostic models across multiple failure scenarios.
 
-Course
-
-Final project for:
-
-Information Visualization
-MS in Data Science
 University of Colorado Boulder
 
 Author
-
 Eduardo Di Santi
+University of Colorado Boulder
 
 License
-
 This repository is intended for academic and educational use.
 
 The NASA IMS Bearing Dataset remains subject to the terms of its original provider. External images and referenced materials remain the property of their respective owners.
