@@ -1,6 +1,4 @@
-Bearing Blueprints
-
-Interactive visualization of bearing degradation from detection to prognosis
+### Interactive visualization of bearing degradation from detection to prognosis ###
 
 Bearing Blueprints is an interactive visual analytics project developed for DTSA 5304 Fundamentals of Data Visualization and is intender for educational purposes only.
 
