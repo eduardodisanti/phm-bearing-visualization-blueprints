@@ -17,7 +17,6 @@ numbersections: true
 This report, including its written content, data analysis, visualization design, implementation, methodological decisions, interpretation of the results, and conclusions, is the author's own work.
 
 Limited AI assistance (Claude by Anthropic and Grammarly) was used only for minor editorial refinement (primarily correcting typographical and grammatical errors and improving sentence conciseness) and for assisting in diagnosing a technical issue related to event propagation in nested Altair views.
-\newpage
 
 # Introduction and Problem Context
 
@@ -181,7 +180,7 @@ be opened directly:
 | **Project site** | https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/ |
 | **Operational dashboard** (primary) | [open](https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/visualisation/bearing_operational.html) |
 | **Prognostic exploration** (experimental) | [open](https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/visualisation/bearing_monitor.html) |
-| **Source and reproduction package** | https://github.com/eduardodisanti/phm-bearing-visualisation-blueprints |
+| **Source and reproduction package** | https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/docs/report.pdf |
 
 They were implemented in Altair [6], which compiles to Vega-Lite [7].
 Every quantity displayed is precomputed, so the pages carry no server
