@@ -1,6 +1,6 @@
 ---
 title: "NASA IMS Bearing Condition-Based Monitoring"
-subtitle: "Operational Visualization and Exploratory Prognostics for Railway Engineers"
+subtitle: "Operational Visualisation and Exploratory Prognostics for Railway Engineers"
 author: "Eduardo Di Santi"
 date: "August 2026"
 geometry: margin=1in
@@ -14,7 +14,7 @@ numbersections: true
 
 # Statement of Authorship and AI Assistance {-}
 
-This report, including its written content, data analysis, visualization design, implementation, methodological decisions, interpretation of the results, and conclusions, is the author's own work.
+This report, including its written content, data analysis, visualisation design, implementation, methodological decisions, interpretation of the results, and conclusions, is the author's own work.
 
 Limited AI assistance (Claude by Anthropic and Grammarly) was used only for minor editorial refinement (primarily correcting typographical and grammatical errors and improving sentence conciseness) and for assisting in diagnosing a technical issue related to event propagation in nested Altair views.
 
@@ -45,6 +45,19 @@ This project uses the NASA IMS Bearing Dataset (Experiment 2) [1, 2], a publicly
 The goal of this project is not to develop a new predictive maintenance algorithm, but to investigate how visualisation can help users understand the degradation process. The proposed interface supports three complementary tasks. First, it helps identify which bearing is beginning to deviate from its normal operating condition. Second, it provides visual evidence that explains why a particular condition has been classified as anomalous. Finally, it supports maintenance decisions by allowing users to compare degradation trends across bearings and to explore how these trends may be used to estimate the progression towards failure.
 
 The visualisation is intended for maintenance engineers, reliability engineers, and maintenance planners who need to interpret sensor data and make informed decisions based on the observed condition of industrial assets.
+
+## Interactive Visualizations
+
+The interactive dashboards are the primary deliverables of this project.
+Readers who wish to explore the results directly can use the links below.
+
+| Resource | Link |
+|---|---|
+| **Operational dashboard (Primary)** | **[Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_operational.html)** |
+| **Prognostic dashboard (Experimental)** | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_monitor.html) |
+| **Project report (PDF)** | [Open report](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/docs/report.pdf) |
+| **Project website** | [githubpages](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/) |
+
 
 # Dataset
 
@@ -178,9 +191,9 @@ be opened directly:
 | | |
 |---|---|
 | **Project site** | https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/ |
-| **Operational dashboard** (primary) | [open](https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/visualisation/bearing_operational.html) |
-| **Prognostic exploration** (experimental) | [open](https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/visualisation/bearing_monitor.html) |
-| **Source and reproduction package** | https://eduardodisanti.github.io/phm-bearing-visualisation-blueprints/docs/report.pdf |
+| **Operational dashboard** (primary) | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_operational.html) |
+| **Prognostic exploration** (experimental) | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_monitor.html) |
+| **Source and reproduction package** | https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/docs/report.pdf |
 
 They were implemented in Altair [6], which compiles to Vega-Lite [7].
 Every quantity displayed is precomputed, so the pages carry no server
