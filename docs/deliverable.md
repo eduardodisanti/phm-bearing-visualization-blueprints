@@ -10,6 +10,18 @@ urlcolor: blue
 toc: true
 toc-depth: 2
 numbersections: true
+header-includes:
+  - |
+    \usepackage{float}
+    \usepackage{placeins}
+    \renewcommand{\topfraction}{0.9}
+    \renewcommand{\bottomfraction}{0.8}
+    \renewcommand{\textfraction}{0.07}
+    \renewcommand{\floatpagefraction}{0.8}
+    \setcounter{topnumber}{3}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{5}
+    \floatplacement{figure}{!htbp}
 ---
 
 # Statement of Authorship and AI Assistance {-}
@@ -22,31 +34,18 @@ Limited AI assistance (Claude by Anthropic and Grammarly) was used only for mino
 
 Prognostics and Health Management (PHM) aims to detect equipment degradation before a failure occurs, allowing maintenance actions to be scheduled at the most appropriate time. Instead of relying on fixed maintenance intervals, PHM uses sensor measurements to monitor the condition of physical assets and identify changes that may indicate the onset of a fault. This approach can reduce unplanned downtime, extend the useful life of components, and improve maintenance planning.
 
-<p align="center">
-  <img src="https://www.design911.com/uploads/products/6568b632-03ba-43b1-a488-849d2e032567/99610599677_1.jpg"
-       alt="Example of a rolling bearing"
-       width="200">
-</p>
-<p align="center">
-<strong>Figure 1.</strong> Example of a rolling bearing, the type of mechanical component analysed in this project.
-</p>
+![Example of a rolling bearing, the type of mechanical component analysed in this project.](https://www.design911.com/uploads/products/6568b632-03ba-43b1-a488-849d2e032567/99610599677_1.jpg){#fig:ims_bearing width=30%}
 
-To make the problem concrete: in the experiment analysed here, four
-bearings were run to destruction on a single shaft. A reference model of
-healthy behaviour, trained without ever observing these units, identified
-every one of them between 14.5 and 74 hours before failure, and for each
-alarm it can point to the fraction of a second of vibration that caused it.
-The question this project addresses is not whether that detection is
-possible, but whether it can be presented in a way that an engineer can
-act on.
+To make the problem concrete: in the experiment analysed here, four bearings were run to destruction on a single shaft. A reference model of healthy behaviour, trained without ever observing these units, identified every one of them between 14.5 and 74 hours before failure, and for each alarm it can point to the fraction of a second of vibration that caused it.
+The question this project addresses is not whether that detection is possible, but whether it can be presented in a way that an engineer can act on.
 
-This project uses the NASA IMS Bearing Dataset (Experiment 2) [1, 2], a publicly available benchmark for predictive maintenance research. Four rolling bearings were monitored under controlled operating conditions until failure, giving a complete run-to-failure scenario suitable for studying how degradation evolves over time and how that evolution can be communicated through interactive visualisation. The illustration in Figure 1 is adapted from BKZ Industry [3].
+This project uses the NASA IMS Bearing Dataset (Experiment 2) [1, 2], a publicly available benchmark for predictive maintenance research. Four rolling bearings were monitored under controlled operating conditions until failure, giving a complete run-to-failure scenario suitable for studying how degradation evolves over time and how that evolution can be communicated through interactive visualisation. The illustration in the previous figure is adapted from BKZ Industry [3].
 
 The goal of this project is not to develop a new predictive maintenance algorithm, but to investigate how visualisation can help users understand the degradation process. The proposed interface supports three complementary tasks. First, it helps identify which bearing is beginning to deviate from its normal operating condition. Second, it provides visual evidence that explains why a particular condition has been classified as anomalous. Finally, it supports maintenance decisions by allowing users to compare degradation trends across bearings and to explore how these trends may be used to estimate the progression towards failure.
 
 The visualisation is intended for maintenance engineers, reliability engineers, and maintenance planners who need to interpret sensor data and make informed decisions based on the observed condition of industrial assets.
 
-## Interactive Visualizations
+## Interactive Visualisations and website
 
 The interactive dashboards are the primary deliverables of this project.
 Readers who wish to explore the results directly can use the links below.
@@ -55,8 +54,7 @@ Readers who wish to explore the results directly can use the links below.
 |---|---|
 | **Operational dashboard (Primary)** | **[Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_operational.html)** |
 | **Prognostic dashboard (Experimental)** | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_monitor.html) |
-| **Project report (PDF)** | [Open report](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/docs/report.pdf) |
-| **Project website** | [githubpages](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/) |
+| **Project website** | [github pages](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/) |
 
 
 # Dataset
@@ -190,10 +188,8 @@ be opened directly:
 
 | | |
 |---|---|
-| **Project site** | https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/ |
 | **Operational dashboard** (primary) | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_operational.html) |
 | **Prognostic exploration** (experimental) | [Open dashboard](https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/visualisation/bearing_monitor.html) |
-| **Source and reproduction package** | https://eduardodisanti.github.io/phm-bearing-visualization-blueprints/docs/report.pdf |
 
 They were implemented in Altair [6], which compiles to Vega-Lite [7].
 Every quantity displayed is precomputed, so the pages carry no server
@@ -223,56 +219,19 @@ Those three needs became Tasks 1 to 3 and, directly, the three panels of
 the dashboard. The evaluation in Section 8 returns to the same population
 to check whether the interface meets the needs they described.
 
-<p align="center">
-  <img src="IMG_0998.jpeg"
-       alt="Hand-drawn low-fidelity prototype of the operational dashboard"
-       width="620">
-</p>
+![Hand-drawn low-fidelity prototype of the operational dashboard](IMG_0998.png){#fig:low_fi_proto width=80%}
 
-**Figure 2.** Low-fidelity prototype, sketched during the requirements
-discussion. Three of its elements survived essentially unchanged: the
-fleet heat map with one row per bearing and time on the horizontal axis;
-the per-unit trajectory with the departure drawn as a vertical line; and
-the innermost view, where the raw signal is overlaid on a nominal band of
-one standard deviation so that the reader can see where the measurement
-leaves it. The sketch also anticipated that the fleet view should look
-uniform before the departure and only become differentiated afterwards,
-which is why the final version suppresses the priority marker until a unit
-has actually departed.
+@fig:low_fi_proto Low-fidelity prototype, sketched during the requirements discussion. Three of its elements survived essentially unchanged: the fleet heat map with one row per bearing and time on the horizontal axis; the per-unit trajectory with the departure drawn as a vertical line; and
+the innermost view, where the raw signal is overlaid on a nominal band of one standard deviation so that the reader can see where the measurement leaves it. The sketch also anticipated that the fleet view should look uniform before the departure and only become differentiated afterwards, which is why the final version suppresses the priority marker until a unit has actually departed.
 
-Two things changed during implementation. The slider used to pick an
-operating hour was replaced by a strip of discrete, clickable periods: an
-interval selected directly on the timeline proved an easier target than a
-continuous control, and unlike a slider the strip can carry information of
-its own — each block is shaded by the worst segment it contains, so
-choosing where to look and seeing where the problem is became a single
-action. A level was then added that the sketch did not have: a bar chart
-of the seventeen segments inside the chosen recording, each expressed as a
-multiple of the unit's limit. Going straight from a ten-hour period to a
-single 60 ms waveform skipped the question of *which* part of the
-recording was anomalous; the bars answer it before the waveform is
-opened.
+Two things changed during implementation. The slider used to pick an operating hour was replaced by a strip of discrete, clickable periods: an interval selected directly on the timeline proved an easier target than a continuous control, and unlike a slider the strip can carry information of its own — each block is shaded by the worst segment it contains, so
+choosing where to look and seeing where the problem is became a single action. A level was then added that the sketch did not have: a bar chart of the seventeen segments inside the chosen recording, each expressed as a multiple of the unit's limit. Going straight froms a ten-hour period to a single 60 ms waveform skipped the question of *which* part of the recording was anomalous; the bars answer it before the waveform is opened.
 
-A third addition emerged only once the interface was in use. The sketch
-moves from a fleet view to a per-unit trajectory without saying how the
-unit is chosen, because on paper the reader simply looks at the row of
-interest. On screen the lower panels each show one bearing at a time, so
-the identity of the unit under examination is a piece of state that
-persists across three views and has to be visible somewhere. An explicit
-bearing selector was added for that reason, and kept in a fixed position
-so the answer to "which unit am I looking at" never moves. It coexists
-with selection from the fleet view — clicking a cell there sets both the
-unit and the period at once — because the two serve different intentions:
-one is browsing, the other is drilling down from an observation already
-made.
+A third addition emerged only once the interface was in use. The sketch moves from a fleet view to a per-unit trajectory without saying how the unit is chosen, because on paper the reader simply looks at the row of interest. On screen the lower panels each show one bearing at a time, so the identity of the unit under examination is a piece of state that persists across three views and has to be visible somewhere. An explicit bearing selector was added for that reason, and kept in a fixed position so the answer to "which unit am I looking at" never moves. It coexists with selection from the fleet view — clicking a cell there sets both the unit and the period at once — because the two serve different intentions: one is browsing, the other is drilling down from an observation already made.
 
-<p align="center">
-  <img src="IMG_0999.jpeg"
-       alt="Hand-drawn low-fidelity prototype of the prognostic view"
-       width="620">
-</p>
+![Hand-drawn low-fidelity prototype of the operational dashboard](IMG_0999.png){#fig:low_fi_proto_predictive width=80%}
 
-**Figure 3.** Low-fidelity prototype of the second, experimental view.
+@fig:low_fi_proto_predictive Low-fidelity prototype of the second, experimental view.
 Much of it reached the delivered design intact: the controls for unit,
 growth law and fitting scope; the central chart with the failure margin,
 the departure drawn as a dotted line and the predicted failure set against
@@ -309,43 +268,24 @@ is merely accurate on average.
 
 ## Operational Dashboard
 
-The dashboard is built on the detection results described in Section 5.2,
-and its structure follows from two of their properties. Because warning
-times range from 14.5 to 74 hours, no fixed time window suits every unit,
-so periods of inspection are defined relative to each bearing's own
-departure. And because each unit has its own operating limit, every axis
-that compares units is normalised to that limit rather than to raw
-vibration.
+The dashboard is built on the detection results described in Section 5.2, and its structure follows from two of their properties. Because warning times range from 14.5 to 74 hours, no fixed time window suits every unit, so periods of inspection are defined relative to each bearing's own departure. And because each unit has its own operating limit, every axis
+that compares units is normalised to that limit rather than to raw vibration.
 
 The operational dashboard addresses the first three research questions by supporting detection, explanation, and prioritisation. The visualisation begins with a fleet-level overview where the condition of all monitored bearings can be compared simultaneously. From this overview, users can progressively inspect the temporal evolution of an individual bearing, identify periods of persistent degradation, and examine the recordings responsible for the observed behaviour.
 
 Each level of the visualisation provides additional context rather than replacing the previous one. High-level indicators summarise the overall condition of the asset, while lower-level views expose the individual vibration windows and the corresponding raw signals. This progressive disclosure allows users to understand not only that an anomaly exists but also the evidence supporting the system's assessment.
 
-![Figure 4. Fleet priority over time.](operational_fleet_timeline.png)
+![Fleet priority over time.](operational_fleet_timeline.png){#fig:operational_fleet_timeline}
 
-**Figure 4.** Fleet view. One row per bearing, one marker per ten hours of
-service, coloured by Health Index. A star marks the unit that was worst at
-that moment, and appears only once a unit has actually departed: while
-everything is healthy a ranking still exists, but it is noise rather than
-a priority. This replaced an earlier ranking taken at the end of the test,
-which reported all four units at 100% (Section 7.6).
+@fig:operational_fleet_timeline Fleet view. One row per bearing, one marker per ten hours of service, coloured by Health Index. A star marks the unit that was worst at that moment, and appears only once a unit has actually departed: while everything is healthy a ranking still exists, but it is noise rather than a priority. This replaced an earlier ranking taken at the end of the test, which reported all four units at 100% (Section 7.6).
 
-![Figure 5. Trajectory of a single bearing.](operational_trajectory.png)
+![Trajectory of a single bearing.](operational_trajectory.png){#fig:operational_trajectory}
 
-**Figure 5.** Trajectory of the selected unit against its own operating
-limit, with the point at which deviation became persistent marked. The
-strip below divides the life of the bearing into inspectable periods,
-shaded by the worst segment each one contains; periods are narrower after
-the departure, where the failure develops quickly.
+@fig:operational_trajectory Trajectory of the selected unit against its own operating limit, with the point at which deviation became persistent marked. The strip below divides the life of the bearing into inspectable periods, shaded by the worst segment each one contains; periods are narrower after the departure, where the failure develops quickly.
 
-![Figure 6. Evidence for a single recording.](operational_why.png)
+![Evidence for a single recording.](operational_why.png){#fig:operational_why}
 
-**Figure 6.** Evidence behind an alarm. The selected recording is cut into
-seventeen 60 ms segments, each shown as a multiple of the unit's limit,
-with the healthy range and the uncertainty of the limit itself shaded in
-green. Below, the raw vibration of the worst segment is drawn against what
-a healthy bearing of this family would have produced. Where the dark trace
-leaves the green band is the defect.
+@fig:operational_why Evidence behind an alarm. The selected recording is cut into seventeen 60 ms segments, each shown as a multiple of the unit's limit, with the healthy range and the uncertainty of the limit itself shaded in green. Below, the raw vibration of the worst segment is drawn against what a healthy bearing of this family would have produced. Where the dark trace leaves the green band is the defect.
 
 ---
 
@@ -355,9 +295,9 @@ While the operational dashboard focuses on the current condition of the monitore
 
 The objective is not to provide an exact prediction of the failure time, but to help users understand how different assumptions influence the projected degradation trajectory. By comparing several candidate models, the visualisation also highlights the uncertainty associated with long-term extrapolation and illustrates how prediction confidence changes as additional observations become available.
 
-![Figure 7. Prognostic exploration.](prognostic_overview.png)
+![Figure Prognostic exploration.](prognostic_overview.png){#fig:prognostic_overview}
 
-**Figure 7.** Experimental prognostic view. Candidate growth laws are
+@fig:prognostic_overview Experimental prognostic view. Candidate growth laws are
 fitted to the observed degradation using only the data available at a
 chosen decision time, and projected forward to the level at which the unit
 eventually failed. The matrix reports, for every combination of law and
